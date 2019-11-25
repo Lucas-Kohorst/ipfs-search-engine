@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ipfs-search-engine/static/css/main.b100e6da.chunk.css",
+    "main.js": "/ipfs-search-engine/static/js/main.487e1621.chunk.js",
+    "main.js.map": "/ipfs-search-engine/static/js/main.487e1621.chunk.js.map",
+    "runtime-main.js": "/ipfs-search-engine/static/js/runtime-main.d8cb725d.js",
+    "runtime-main.js.map": "/ipfs-search-engine/static/js/runtime-main.d8cb725d.js.map",
+    "static/js/2.896171fd.chunk.js": "/ipfs-search-engine/static/js/2.896171fd.chunk.js",
+    "static/js/2.896171fd.chunk.js.map": "/ipfs-search-engine/static/js/2.896171fd.chunk.js.map",
+    "index.html": "/ipfs-search-engine/index.html",
+    "precache-manifest.009d7e1e01036dfb08500a887853a980.js": "/ipfs-search-engine/precache-manifest.009d7e1e01036dfb08500a887853a980.js",
+    "service-worker.js": "/ipfs-search-engine/service-worker.js",
+    "static/css/main.b100e6da.chunk.css.map": "/ipfs-search-engine/static/css/main.b100e6da.chunk.css.map",
+    "static/media/logo.svg": "/ipfs-search-engine/static/media/logo.25bf045c.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d8cb725d.js",
+    "static/js/2.896171fd.chunk.js",
+    "static/css/main.b100e6da.chunk.css",
+    "static/js/main.487e1621.chunk.js"
+  ]
+}

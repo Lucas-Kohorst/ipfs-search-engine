@@ -1,79 +1,8 @@
 import React from "react";
 import SearchBar from "material-ui-search-bar";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 
-const Result = ({ title, hash, description, lastSeen, score, size }) => {
-  var titleText = document.createElement("div");
-  titleText.innerHTML = title;
-  titleText = titleText.textContent || titleText.innerText || "";
-
-  var descriptionText = document.createElement("div");
-  descriptionText.innerHTML = description;
-  var descriptionText = descriptionText.textContent || descriptionText.innerText || "";
-
-  if (title != null && title != "") {
-    return (
-      <div style={{ paddingTop: "2em" }}>
-        <Card style={{ maxWidth: "345" }}>
-          <CardActionArea>
-            <CardContent>
-              <Typography gutterBottom variant="h6" component="h2">
-                <a href={"https://cloudflare-ipfs.com/ipfs/" + hash}>{titleText}</a>
-              </Typography>
-              <Typography variant="body" color="textSecondary" component="p">
-                {descriptionText}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Typography variant="body" color="textSecondary" component="p">
-              {score ? "Score: " + score : ""}
-            </Typography>
-            <Typography variant="body" color="textSecondary" component="p">
-              {size ? "Size: " + size + " bytes" : ""}
-            </Typography>
-            <Typography variant="body" color="textSecondary" component="p">
-              {lastSeen ? "Last seen: " + lastSeen.split("T")[0] : ""}
-            </Typography>
-          </CardActions>
-        </Card>
-      </div>
-    );
-  } else {
-    return <div></div>;
-  }
-};
-
-const Wiki = ({ title, about, link }) => {
-  if (about != null && about != "") {
-    return (
-      <Card style={{ maxWidth: "345" }}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {title}
-            </Typography>
-            <Typography variant="body" color="textSecondary" component="p">
-              {about}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="medium" color="primary">
-            <a href={link}>Wiki</a>
-          </Button>
-        </CardActions>
-      </Card>
-    );
-  } else {
-    return <div></div>;
-  }
-};
+import { Wiki } from "./Wiki"
+import { Result } from "./Result"
 
 class Home extends React.Component {
   constructor(props) {
@@ -86,25 +15,26 @@ class Home extends React.Component {
     };
   }
 
-  _search = query => {
+  _search = (query) => {
     this.setState({
       wiki: null,
       title: null,
       results: null
     });
-    var queryArray = []
+    var queryArray = [];
     if (query.includes(" ")) {
-      queryArray = query.split(" ")
-            query = "";
-      for (var i = 0;  i < queryArray.length; i++) {
-        queryArray[i] = queryArray[i][0].toUpperCase() + queryArray[i].slice(1).toLowerCase();
+      queryArray = query.split(" ");
+      query = "";
+      for (var i = 0; i < queryArray.length; i++) {
+        queryArray[i] =
+          queryArray[i][0].toUpperCase() + queryArray[i].slice(1).toLowerCase();
         if (i < queryArray.length - 1) {
-          query += queryArray[i] + "_"
+          query += queryArray[i] + "_";
         } else {
-          query += queryArray[i]
+          query += queryArray[i];
         }
       }
-      console.log(query)
+      console.log(query);
     }
     fetch("https://en.wikipedia-on-ipfs.org/wiki/" + query + ".html")
       .then(response => response.text())
@@ -125,7 +55,16 @@ class Home extends React.Component {
         });
       })
       .catch(error => console.error(error));
-  };
+  }
+
+  _getMetaData(hash) {
+    fetch("https://api.ipfs-search.com/v1/metadata/" + hash)
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .catch(error => console.error(error));
+  }
 
   _getElementByXpath(doc, path) {
     return doc.evaluate(path, doc, null, XPathResult.STRING_TYPE, null)
@@ -159,7 +98,7 @@ class Home extends React.Component {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              height: "40vh"
+              height: "45vh"
             }}
           >
             <div style={{ padding: "2em" }}>
@@ -173,9 +112,23 @@ class Home extends React.Component {
               onRequestSearch={() => this._search(this.state.value)}
               onCancelSearch={() => this.setState({ value: "" })}
             />
+            <h5>
+              Running your own{" "}
+              <a href="https://docs.ipfs.io/introduction/usage/">IPFS node</a>{" "}
+              will speed up your search and help others
+            </h5>
           </div>
         ) : (
-          <div style={{ display: "flex", padding: "2em" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "2em"
+            }}
+          >
+            <h1>Search the Distributed Web</h1>
             <SearchBar
               style={{ width: "60%" }}
               value={this.state.value}
@@ -188,7 +141,6 @@ class Home extends React.Component {
         <div
           style={{
             textAlign: "left",
-            width: "60%",
             padding: "2em"
           }}
         >
@@ -217,7 +169,7 @@ class Home extends React.Component {
           </a>
           <a
             style={{ padding: "0.75em" }}
-            href="https://github.com/Lucas-Kohorst/ipfs-search-react"
+            href="https://github.com/Lucas-Kohorst/ipfs-search-engine"
           >
             Code
           </a>
