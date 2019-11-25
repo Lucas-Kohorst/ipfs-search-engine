@@ -62,3 +62,4 @@ yarn.lock
 .next
 
 .DS_Store
+.vscode
