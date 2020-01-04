@@ -1,5 +1,12 @@
 import React from "react";
 import SearchBar from "material-ui-search-bar";
+import Chip from "@material-ui/core/Chip";
+import ImageIcon from "@material-ui/icons/Image";
+import DescriptionIcon from "@material-ui/icons/Description";
+import TextFormatIcon from "@material-ui/icons/TextFormat";
+import VideocamIcon from "@material-ui/icons/Videocam";
+import AudiotrackIcon from "@material-ui/icons/Audiotrack";
+import CreateNewFolderIcon from "@material-ui/icons/CreateNewFolder";
 
 import { Wiki } from "./Wiki"
 import { Result } from "./Result"
@@ -115,7 +122,7 @@ class Home extends React.Component {
             <h5>
               Running your own{" "}
               <a href="https://docs.ipfs.io/introduction/usage/">IPFS node</a>{" "}
-              will speed up your search and help others
+              will speed up your search and distribute content
             </h5>
           </div>
         ) : (

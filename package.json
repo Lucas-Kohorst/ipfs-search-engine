@@ -2,7 +2,7 @@
     "name": "ipfs-search",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://lucas-kohorst.github.io/ipfs-search-engine",
+    "homepage": "./",
     "repository": {
         "url": "https://lucas-kohorst.github.io/ipfs-search-engine"
     },
