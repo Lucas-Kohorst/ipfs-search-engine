@@ -33,8 +33,11 @@ class Home extends React.Component {
       queryArray = query.split(" ");
       query = "";
       for (var i = 0; i < queryArray.length; i++) {
-        queryArray[i] =
-          queryArray[i][0].toUpperCase() + queryArray[i].slice(1).toLowerCase();
+        if (queryArray[i].length >= 1) {
+          queryArray[i] =
+            queryArray[i][0].toUpperCase() +
+            queryArray[i].slice(1).toLowerCase();
+        }
         if (i < queryArray.length - 1) {
           query += queryArray[i] + "_";
         } else {
@@ -49,7 +52,9 @@ class Home extends React.Component {
         var parser = new DOMParser();
         var doc = parser.parseFromString(data, "text/html");
         this.setState({
-          wiki: this._getElementByXpath(doc, "/html/body/div[1]/div/p[2]"),
+          wiki:
+            this._getElementByXpath(doc, "/html/body/div[1]/div/p[2]") ||
+            this._getElementByXpath(doc, "/html/body/div[1]"),
           title: query
         });
       })
@@ -119,7 +124,7 @@ class Home extends React.Component {
               onRequestSearch={() => this._search(this.state.value)}
               onCancelSearch={() => this.setState({ value: "" })}
             />
-            <h5>
+            <h5 style={{ margin: "2em" }}>
               Running your own{" "}
               <a href="https://docs.ipfs.io/introduction/usage/">IPFS node</a>{" "}
               will speed up your search and distribute content
